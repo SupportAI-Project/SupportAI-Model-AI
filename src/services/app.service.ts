@@ -1,9 +1,12 @@
 import { Injectable } from '@nestjs/common';
+import { OpenAIService } from './openai.service';
 
 @Injectable()
 export class AppService {
-  getHello(): string {
+  constructor(private openaiService: OpenAIService) {}
+  async getHello(): Promise<string> {
     let word: string = 'hee'
-    return 'Hello World!' + word;
+    const result = await this.openaiService.getTroubleshootingSteps(word);
+    return 'Hello World!' + word + result;
   }
 }
