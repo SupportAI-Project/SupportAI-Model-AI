@@ -1,4 +1,4 @@
-import fs from 'fs';
+import * as fs from 'fs';
 // export type ConversationMessages = Record<string, string>;
 // change back to this type, infer the conversation from backend and format into objects of messages to the api
 const messages = fs.readFileSync('src/openai/lib/data/messages.txt', 'utf8');
