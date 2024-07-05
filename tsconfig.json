@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2021",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@app/*": ["src/app/*"],
+      "@controllers/*": ["src/controllers/*"],
+      "@modules/*": ["src/modules/*"],
+      "@models/*": ["src/models/*"],
+      "@services/*": ["src/services/*"],
+      
+      "@openai/*": ["src/openai/*"],
+      "@openai/constants/*": ["src/openai/constants/*"],
+      "@openai/controllers/*": ["src/openai/controllers/*"],
+      "@openai/dto/*": ["src/openai/dto/*"],
+      "@openai/lib/*": ["src/openai/lib/*"],
+      "@openai/modules/*": ["src/openai/modules/*"],
+      "@openai/services/*": ["src/openai/services/*"],
+
+    }
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
+}
