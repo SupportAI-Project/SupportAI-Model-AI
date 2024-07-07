@@ -1,4 +1,4 @@
-import { Injectable  } from "@nestjs/common";
+import { Injectable, Logger  } from "@nestjs/common";
 import OpenAIApi  from "openai";
 import { apiRequestDTO } from "../dto/apiRequest.dto";
 import { GuideResponseDTO} from "../dto/guideResponse.dto";
@@ -34,6 +34,7 @@ export class OpenAIService {
     async generateGuide(chat: apiRequestDTO): Promise<string> {
         const messages = this.formatConversation(this.conversationMessages);
         console.log("messages: ", messages);
+        Logger.log('Generating guide...');
         const response = await this.openai.chat.completions.create({
             model: GPT_MODEL,
             messages: [
@@ -51,6 +52,7 @@ export class OpenAIService {
                 step: guide
             }
         };
+        Logger.log('Guide generated', guide);
         return formatedGuide;
     };
 };
