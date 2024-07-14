@@ -10,7 +10,8 @@ async function bootstrap() {
     origin:'*',
   });
   
-  await app.listen(3000);
-  console.log('App is running on port 3000');
+  
+  await app.listen(3002);
+  console.log('App is running on port 3002');
 }
 bootstrap();
