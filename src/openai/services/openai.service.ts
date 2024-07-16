@@ -2,25 +2,33 @@ import { Injectable, Logger  } from "@nestjs/common";
 import OpenAIApi  from "openai";
 import { apiRequestDTO } from "../dto/apiRequest.dto";
 import { GuideResponseDTO} from "../dto/guideResponse.dto";
-import {MESSAGES, GPT_MODEL, SYSTEM_MESSAGE} from "../constants/constants";
+import {MESSAGES, GPT_MODEL, SYSTEM_MESSAGE, USER_PROMPT, OUTPUT_INDICATOR, CONTEXT_GUIDE} from "../constants/constants";
 import { ConfigService } from "@nestjs/config";
 
 @Injectable()
 export class OpenAIService {
     private readonly openai: OpenAIApi;
-    private readonly conversationMessages: string;
     private readonly configService: ConfigService;
+    
+    private readonly conversationMessages: string;
+    private readonly userPrompt: string;
+    private readonly outputIndicator: string;
+    private readonly contextGuide: string;
     
     constructor() {
         this.configService = new ConfigService();
         this.openai = new OpenAIApi({ apiKey: this.configService.get('OPENAI_API_KEY') });
+        
         this.conversationMessages = MESSAGES;
+        this.userPrompt = USER_PROMPT;
+        this.outputIndicator = OUTPUT_INDICATOR;
+        this.contextGuide = CONTEXT_GUIDE;
     }
 
 
     formatConversation (chatConversation: string): any[] {
         const messages = chatConversation;
-        console.log("messages: ", messages);
+        // Logger.log("messages: ", messages);
         if (!messages) {
             throw new Error('No messages found in conversation');
         }
@@ -33,12 +41,15 @@ export class OpenAIService {
 
     async generateGuide(chat: apiRequestDTO): Promise<string> {
         const messages = this.formatConversation(this.conversationMessages);
-        console.log("messages: ", messages);
+        // console.log("messages: ", messages);
         Logger.log('Generating guide...');
         const response = await this.openai.chat.completions.create({
             model: GPT_MODEL,
             messages: [
                 { role: 'system', content: SYSTEM_MESSAGE },
+                { role: 'user', content: this.userPrompt },
+                { role: 'system', content: this.outputIndicator },
+                { role: 'system', content: this.contextGuide },
                 ...messages
               ],
         });
@@ -52,7 +63,11 @@ export class OpenAIService {
                 step: guide
             }
         };
-        Logger.log('Guide generated', guide);
+        // Logger.log('Guide generated', guide);
+        //{
+        //  1.  [1st step, 2nd step] : String
+        //  2.
+        // } 
         return formatedGuide;
     };
 };
