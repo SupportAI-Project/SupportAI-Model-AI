@@ -9,7 +9,8 @@ export const SYSTEM_MESSAGE: string = `System Prompt: You are an AI assistant de
                                         provided by a support specialist.
                                         Your job is to generate a guide based on the conversation between the user and the support specialist.`;
 
-export const USER_PROMPT: string = `Initial User Prompt: Break down the solution to a problem into a series of steps, 
+export const USER_PROMPT: string = `Initial User Prompt: I am a client, wishing to get some help in solving my problems.
+                                        Please break down the solution to a problem into a series of steps, 
                                         from the beginning of the troubleshooting process to resolution. 
                                         Ensure the steps are accurate and applicable to a wide range of cases, 
                                         avoiding specific IDs or unique scenarios.`; 
