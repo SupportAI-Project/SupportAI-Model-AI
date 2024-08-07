@@ -10,6 +10,7 @@ export class OpenAIController {
     @Post("generate-guide")
     async generateGuide(@Body() chat: apiRequestDTO): Promise<string> {
         const guide = await this.openaiService.generateGuide(chat);
+        console.log("Guide: ", guide);
         return guide;
     }
 }
