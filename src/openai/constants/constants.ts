@@ -1,5 +1,7 @@
 import * as fs from 'fs';
-const exampleConversation = fs.readFileSync('src/openai/lib/data/messages.txt', 'utf8');
+const FILE_PATH = "src/openai/lib/data/messages.txt";
+const ENCODING = "utf8";
+const exampleConversation = fs.readFileSync(FILE_PATH, ENCODING);
 export const MESSAGES: string = exampleConversation;
 
 export const GPT_MODEL: string = 'gpt-3.5-turbo';
