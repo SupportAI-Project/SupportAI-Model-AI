@@ -5,6 +5,7 @@ const exampleConversation = fs.readFileSync(FILE_PATH, ENCODING);
 export const MESSAGES: string = exampleConversation;
 
 export const GPT_MODEL: string = 'gpt-3.5-turbo';
+export const VALID_ROLES: string[] = ['system', 'assistant', 'user', 'function'];
 
 export const SYSTEM_MESSAGE: string = `System Prompt: You are an AI assistant designed to generate troubleshooting guides,
                                         for resolving customer support issues based on provided documentation,

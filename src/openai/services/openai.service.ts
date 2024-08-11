@@ -2,7 +2,15 @@ import { Injectable, Logger  } from "@nestjs/common";
 import OpenAIApi  from "openai";
 import { apiRequestDTO } from "../dto/apiRequest.dto";
 import { GuideResponseDTO} from "../dto/guideResponse.dto";
-import {MESSAGES, GPT_MODEL, SYSTEM_MESSAGE, USER_PROMPT, OUTPUT_INDICATOR, CONTEXT_GUIDE} from "../constants/constants";
+import {
+    MESSAGES, 
+    GPT_MODEL, 
+    SYSTEM_MESSAGE, 
+    USER_PROMPT, 
+    OUTPUT_INDICATOR, 
+    CONTEXT_GUIDE, 
+    VALID_ROLES,
+} from "../constants/constants";
 import { ConfigService } from "@nestjs/config";
 
 @Injectable()
@@ -18,7 +26,7 @@ export class OpenAIService {
 
     formatConversation (chatConversation: string): any[] {
         const messages = chatConversation.trim();
-        // Logger.log("messages: ", messages);
+        Logger.log("messages: ", messages);
         if (!messages) {
             throw new Error('No messages found in conversation');
         }
@@ -28,7 +36,7 @@ export class OpenAIService {
             const message = messageParts.join(': ');
             return {name: role, role: role, content: message};
         })
-        .filter(message => ['system', 'assistant', 'user', 'function'].includes(message.role) && message.content.trim() !== '');
+        .filter(message => VALID_ROLES.includes(message.role) && message.content.trim() !== '');
         return formattedMessages;
     };
 
