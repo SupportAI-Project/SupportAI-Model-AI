@@ -18,19 +18,23 @@ export const USER_PROMPT: string = `Initial User Prompt: I am a client, wishing 
                                         Ensure the steps are accurate and applicable to a wide range of cases, 
                                         avoiding specific IDs or unique scenarios.`; 
 
-export const OUTPUT_INDICATOR: string = `Output Indicator - Please return the guide in a clear and concise manner. Return it as a String.
-                                        The String will have an opening and closing sentence (think of it like item [0] and item [n] in a list).
+export const OUTPUT_INDICATOR: string = `Output Indicator - Please return the guide in a clear and concise manner. Return it as a String, formatted as follows:
                                         The String will be numbered sentences, like this "1. Go to .... it.  2. Plug in the ..... on. " .
-                                        The numbers will be used to indicate the order of the steps. No need of escape characters. 
-                                        The backend will transform the strings into array of strings, each index will be a step (exclude numbering on opening and closing sentences).`;
+                                        The response should be formatted in SEO-friendly HTML, 
+                                        limited to the following HTML tags: p, h1, h2, h3, h4, h5, h6, strong, i, ul, li, ol.
+                                        h1 will be colored with blue, h2 will be colored with purple.
+                                        `;
                                         
-export const CONTEXT_GUIDE: string = `Context Guide (example): Based on the conversation, here is a troubleshooting guide for fixing an ansible playbook that is not running:
-                                    Check which process is using port 3000.
-                                    Identify the Docker container using port 3000.
-                                    Stop the Docker container using the "docker ps" and "docker stop [container_id]" commands
-                                    Run the Ansible playbook again.
-                                    Verify that the Ansible playbook runs successfully.
-                                    Consider configuring a different port to avoid conflicts in the future.
-                                    Test and validate that both the Docker container and the Ansible playbook can run simultaneously with different ports.
-                                    By following these steps, you should be able to troubleshoot and resolve the issue of your Ansible playbook failing due to port 3000 being in use.
+export const CONTEXT_GUIDE: string = `<h1>Troubleshooting Guide for Ansible Playbook</h1>
+                                        <p>Based on the conversation, here is a troubleshooting guide for fixing an ansible playbook that is not running:</p>
+                                        <ol>
+                                            <li>Check which process is using port 3000.</li>
+                                            <li>Identify the Docker container using port 3000.</li>
+                                            <li>Stop the Docker container using the <code>docker ps</code> and <code>docker stop [container_id]</code> commands.</li>
+                                            <li>Run the Ansible playbook again.</li>
+                                            <li>Verify that the Ansible playbook runs successfully.</li>
+                                            <li>Consider configuring a different port to avoid conflicts in the future.</li>
+                                            <li>Test and validate that both the Docker container and the Ansible playbook can run simultaneously with different ports.</li>
+                                        </ol>
+                                        <p>By following these steps, you should be able to troubleshoot and resolve the issue of your Ansible playbook failing due to port 3000 being in use.</p>
                                     `;

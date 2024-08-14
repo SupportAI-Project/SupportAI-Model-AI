@@ -61,7 +61,8 @@ export class OpenAIService {
     formatGuide(guide: string): GuideResponseDTO {
         const steps = guide.split('\n');
         const formatedGuide: GuideResponseDTO = {
-            steps: steps
+            title: steps[0],
+            contentHTML: steps.slice(1).join('\n'),
         };
         return formatedGuide;
     };
