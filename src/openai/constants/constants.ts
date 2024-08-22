@@ -1,11 +1,6 @@
 import * as fs from 'fs';
-const FILE_PATH = "src/openai/lib/data/messages.txt";
-const ENCODING = "utf8";
-const exampleConversation = fs.readFileSync(FILE_PATH, ENCODING);
-export const MESSAGES: string = exampleConversation;
 
 export const GPT_MODEL: string = 'gpt-3.5-turbo';
-export const VALID_ROLES: string[] = ['system', 'assistant', 'user', 'function'];
 
 export const SYSTEM_MESSAGE: string = `System Prompt: You are an AI assistant designed to generate troubleshooting guides,
                                         for resolving customer support issues based on provided documentation,
@@ -25,7 +20,8 @@ export const OUTPUT_INDICATOR: string = `Output Indicator - Please return the gu
                                         h1 will be colored with blue, h2 will be colored with purple.
                                         `;
                                         
-export const CONTEXT_GUIDE: string = `<h1>Troubleshooting Guide for Ansible Playbook</h1>
+export const CONTEXT_EXAMPLE: string = `Example:
+                                        <h1>Troubleshooting Guide for Ansible Playbook</h1>
                                         <p>Based on the conversation, here is a troubleshooting guide for fixing an ansible playbook that is not running:</p>
                                         <ol>
                                             <li>Check which process is using port 3000.</li>
