@@ -77,7 +77,8 @@ export class OpenAIService {
 
     formatGuide(guide: string): GuideResponseDTO {
         const lines = guide.split('\n');
-        const title = lines.shift() || '';
+        let title = lines.shift() || '';
+        title = title.replace(/<\/?[^>]+(>|$)/g, "");
         const formatedGuide: GuideResponseDTO = {
             title: title,
             contentHTML: lines.join('\n'),
