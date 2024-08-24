@@ -23,7 +23,7 @@
       "@openai/*": ["src/openai/*"],
       "@constants/*": ["src/openai/constants/*"],
       "@dto/*": ["src/openai/dto/*"],
-      "@entities*": ["src/openai/dto/entities/*"],
+      "@entities/*": ["src/openai/dto/entities/*"],
     }
   },
   "include": ["src/**/*.ts"],
