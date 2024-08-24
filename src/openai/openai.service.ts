@@ -1,7 +1,8 @@
 import { Injectable, Logger  } from "@nestjs/common";
 import OpenAIApi  from "openai";
-import { apiRequestDTO, Message } from "./dto/apiRequest.dto";
-import { GuideResponseDTO} from "./dto/guideResponse.dto";
+import { apiRequestDTO } from "@dto/apiRequest.dto";
+import { Message } from "@entities/message.interface";
+import { GuideResponseDTO} from "@dto/guideResponse.dto";
 import {
     GPT_MODEL, 
     SYSTEM_MESSAGE, 
@@ -24,20 +25,16 @@ export class OpenAIService {
 
     formatConversation (requestDto: apiRequestDTO): Message[] {
         console.log("formatConversation: requestDto: ", requestDto);
-        const chatId = requestDto.chatId;
-        const customerId = requestDto.user.userId;
         const userName = requestDto.user.username;
         const role = requestDto.user.roles[0];
         const messages = requestDto.messages;
 
-        // console.log("role: ", role);
 
         if (!messages) {
             throw new Error('No messages found in conversation');
         }
 
         const formattedMessages = messages.map(message => {
-            // console.log("message.content: ", message.content);
             const { content } = message;
             return {
                 name: userName,
@@ -54,11 +51,8 @@ export class OpenAIService {
 
     async generateGuide(requestDto: apiRequestDTO): Promise<GuideResponseDTO> {
 
-        // console.log("(AI) - generateGuide: requestDto: ", requestDto);
-        // console.log("messages: ", chat);
         
         const messages = this.formatConversation(requestDto);
-        // console.log("messages: ", messages);
         Logger.log('Generating guide...');
         const response = await this.openai.chat.completions.create({
             model: GPT_MODEL,
@@ -70,7 +64,6 @@ export class OpenAIService {
                 ...messages,
             ],
         });
-        // Logger.log('Guide generated: ', response.choices[0].message.content);
         const guide = this.formatGuide(response.choices[0].message.content);
         return guide;
     };
@@ -78,7 +71,7 @@ export class OpenAIService {
     formatGuide(guide: string): GuideResponseDTO {
         const lines = guide.split('\n');
         let title = lines.shift() || '';
-        title = title.replace(/<\/?[^>]+(>|$)/g, "");
+        title = title.replace(/<\/?[^>]+(>|$)/g, "").replace(/\*\*/g, "");
         const formatedGuide: GuideResponseDTO = {
             title: title,
             contentHTML: lines.join('\n'),
