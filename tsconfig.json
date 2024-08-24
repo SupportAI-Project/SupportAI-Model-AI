@@ -19,19 +19,11 @@
     "noFallthroughCasesInSwitch": false,
     "paths": {
       "@app/*": ["src/app/*"],
-      "@controllers/*": ["src/controllers/*"],
-      "@modules/*": ["src/modules/*"],
-      "@models/*": ["src/models/*"],
-      "@services/*": ["src/services/*"],
       
       "@openai/*": ["src/openai/*"],
-      "@openai/constants/*": ["src/openai/constants/*"],
-      "@openai/controllers/*": ["src/openai/controllers/*"],
-      "@openai/dto/*": ["src/openai/dto/*"],
-      "@openai/lib/*": ["src/openai/lib/*"],
-      "@openai/modules/*": ["src/openai/modules/*"],
-      "@openai/services/*": ["src/openai/services/*"],
-
+      "@constants/*": ["src/openai/constants/*"],
+      "@dto/*": ["src/openai/dto/*"],
+      "@entities/*": ["src/openai/dto/entities/*"],
     }
   },
   "include": ["src/**/*.ts"],

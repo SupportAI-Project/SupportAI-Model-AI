@@ -1,5 +1,7 @@
+import { User } from "./entities/user.interface";
+import { Message } from "./entities/message.interface";
+
 export class apiRequestDTO {
-    _id: string;
-    chatId: string;
-    chatConversation: Record<string, any>;
+    user: User;
+    messages: Message[];
 }
