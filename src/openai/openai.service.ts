@@ -11,6 +11,7 @@ import {
   CONTEXT_EXAMPLE,
 } from './constants/constants';
 import { ConfigService } from '@nestjs/config';
+import { Role } from './dto/entities/role.enum';
 
 @Injectable()
 export class OpenAIService {
@@ -25,9 +26,7 @@ export class OpenAIService {
   }
 
   formatConversation(requestDto: apiRequestDTO): Message[] {
-    console.log('formatConversation: requestDto: ', requestDto);
-    const userName = requestDto.user.username;
-    const role = requestDto.user.roles[0];
+    const username = requestDto.user.username;
     const messages = requestDto.messages;
 
     if (!messages) {
@@ -35,10 +34,10 @@ export class OpenAIService {
     }
 
     const formattedMessages = messages.map((message) => {
-      const { content } = message;
+      const { content, isSupportSender } = message;
       return {
-        name: userName,
-        role: role,
+        name: username,
+        role: isSupportSender ? Role.ASSISTANT : Role.USER,
         content: content,
       };
     });
@@ -74,7 +73,6 @@ export class OpenAIService {
       title: title,
       contentHTML: lines.join('\n'),
     };
-    console.log('formatedGuide: ', formatedGuide);
     return formatedGuide;
   }
 }
