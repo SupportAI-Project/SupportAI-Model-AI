@@ -1,4 +1,4 @@
-service: supportai-ai-prod
+service: supportai-ai
 
 frameworkVersion: '4'
 
