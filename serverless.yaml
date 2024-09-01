@@ -1,6 +1,6 @@
 service: supportai-ai-prod
 
-frameworkVersion: '3'
+frameworkVersion: '4'
 
 useDotenv: true
 
