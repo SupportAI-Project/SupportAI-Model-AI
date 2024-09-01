@@ -1,16 +1,21 @@
-import { Controller, Post, Body } from "@nestjs/common";
-import { OpenAIService } from "./openai.service";
-import { apiRequestDTO } from "./dto/apiRequest.dto";
-import { GuideResponseDTO } from "./dto/guideResponse.dto";
+import { Controller, Post, Body, Get } from '@nestjs/common';
+import { OpenAIService } from './openai.service';
+import { apiRequestDTO } from './dto/apiRequest.dto';
+import { GuideResponseDTO } from './dto/guideResponse.dto';
 
-@Controller("openai")
+@Controller('openai')
 export class OpenAIController {
-    constructor(private readonly openaiService: OpenAIService) {}
+  constructor(private readonly openaiService: OpenAIService) {}
 
-    @Post("generate-guide")
-    async generateGuide(@Body() chat: apiRequestDTO): Promise<GuideResponseDTO> {
-        const guide = await this.openaiService.generateGuide(chat);
-        console.log("Guide: ", guide);
-        return guide;
-    }
+  @Get()
+  getHello(): string {
+    return 'Hello World!';
+  }
+
+  @Post('generate-guide')
+  async generateGuide(@Body() chat: apiRequestDTO): Promise<GuideResponseDTO> {
+    const guide = await this.openaiService.generateGuide(chat);
+    console.log('Guide: ', guide);
+    return guide;
+  }
 }
