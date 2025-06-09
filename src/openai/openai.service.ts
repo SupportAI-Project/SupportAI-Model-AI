@@ -9,6 +9,7 @@ import {
   USER_PROMPT,
   OUTPUT_INDICATOR,
   CONTEXT_EXAMPLE,
+  API_BASE_URL,
 } from './constants/constants';
 import { ConfigService } from '@nestjs/config';
 import { Role } from './dto/entities/role.enum';
@@ -22,6 +23,7 @@ export class OpenAIService {
     this.configService = new ConfigService();
     this.openai = new OpenAIApi({
       apiKey: this.configService.get('OPENAI_API_KEY'),
+      baseURL: API_BASE_URL,
     });
   }
 
